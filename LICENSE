@@ -24,4 +24,4 @@ SOFTWARE.
 
 NOTICE: This project includes third-party software components with their own licenses.
 Some components may be licensed under terms that differ from this MIT License.
-See the [THIRD_PARTY_LICENSES](SBOMs/THIRD_PARTY_LICENSES.md) file for details about the licenses of the dependencies.
+See the SBOMs/THIRD_PARTY_LICENSES.md file for details about the licenses of the dependencies.
