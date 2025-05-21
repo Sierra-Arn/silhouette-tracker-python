@@ -1,0 +1,10 @@
+channels:
+  - conda-forge
+dependencies:
+  - opencv
+  - pydantic-settings
+  - python
+  - ultralytics
+  - pip:
+    - torch==2.7.0
+    - torchvision==0.22.0
