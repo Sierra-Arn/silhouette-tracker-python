@@ -1,70 +1,76 @@
 # **Silhouette Tracker: Real-Time Human Pose Estimation via YOLOv8 with CUDA Acceleration**
 
-Система отслеживания человеческих поз в реальном времени с использованием **YOLOv8** и аппаратного ускорения **NVIDIA CUDA**. Проект реализован в изолированном окружении на базе **Conda** для обеспечения воспроизводимости и переносимости.
+A real-time human pose estimation system using **YOLOv8** with **NVIDIA CUDA** hardware acceleration. The project is implemented in an isolated **Conda** environment for reproducibility and portability.
 
-## **Предварительные требования**
+> **Note**:  
+This is an educational project focused on demonstrating modern computer vision workflows and CUDA acceleration rather than providing a production tracking system.
 
-1. **ОС:** Linux x86_64.
-2. **Менеджер пакетов python:** Conda (Anaconda, Miniconda, Mamba или Micromamba).
-3. **NVIDIA CUDA:** версия CUDA должна быть 12.6.3 или выше, а также должны быть установлены соответствующие драйверы NVIDIA.
+## **Available Documentation / Доступная документация**
 
-## **Структура проекта**
+- [English Documentation](README.md) (current document / текущий документ)
+- [Документация на русском языке](README_RU.md)
+
+## **Prerequisites**
+
+1. **OS:** Linux x86_64.
+2. **Python Package Manager:** Conda (Anaconda, Miniconda, Mamba, or Micromamba).
+3. **NVIDIA CUDA:** CUDA version 12.6.3 or higher with corresponding NVIDIA drivers installed.
+
+## **Project Structure**
 
 ```bash
 .
-├── README.md   # Документация
-├──.env.example # Шаблон конфигурации
-├── LICENSE     # Лицензия проекта
-├── SBOMs/      # Метаданные зависимостей
-├── app/        # Исходный код приложения
-├── models/     # Модели YOLOv8 для работы
-└── videos/     # Видео для работы
+├── .env.example    # Configuration template
+├── SBOMs/          # Dependency metadata
+├── app/            # Application source code
+├── models/         # YOLOv8 models
+└── videos/         # Input video files
 ```
 
-## **Инструкция по установке и запуску**
+## **Quick Start**
 
-### **I. Клонирование репозитория**
+### **I. Clone the Repository**
 
 ```bash
-git clone https://github.com/Sierra-Arn/silhouette-tracker-python.git
+git clone https://github.com/Sierra-Arn/silhouette-tracker-python.git  
 cd silhouette-tracker-python
 ```
 
-### **II. Создание и активация виртуальной среды**
+### **II. Create and Activate Virtual Environment**
 
 ```bash
 conda env create -p ./.venv -f SBOMs/conda-linux-64-lock.yml
 conda activate ./.venv
 ```
 
-### **III. Подготовка данных**
+### **III. Prepare Data**
 
-Модели и видео не включены в репозиторий из-за ограничений размера. Чтобы скачать модели выполните следующие команды:
+Models and videos are not included in the repository due to size limitations. To download the models, run:
 
 ```bash
-wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n-pose.pt && \
-wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8s-pose.pt && \
-wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8m-pose.pt && \
-wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8l-pose.pt && \
-wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x-pose.pt
+wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n-pose.pt   && \
+wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8s-pose.pt   && \
+wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8m-pose.pt   && \
+wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8l-pose.pt   && \
+wget -P models/ https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8x-pose.pt  
 ```
 
-В директорию `videos` Вы можете добавить любое видео. В качестве демонстрации, Вы можете скачать видео с сайта [Pexels Free Stock Videos](https://www.pexels.com/videos/).  
-Например, [Mother and daughter with face masks at the park by Gustavo Fring from Pexels](https://www.pexels.com/video/mother-and-daughter-with-face-masks-at-the-park-4265036/).
+Add any video to the `videos/` directory. For demonstration, you can download videos from [Pexels Free Stock Videos](https://www.pexels.com/videos/).  
+For example: [Mother and daughter with face masks at the park by Gustavo Fring from Pexels](https://www.pexels.com/video/mother-and-daughter-with-face-masks-at-the-park-4265036/).
 
-### **IV. Настройка конфигурации через `.env`**
+### **IV. Configure via `.env`**
 
-1. Создайте файл `.env` из шаблона:
+1. Create `.env` file from template:
 ```bash
 cp .env.example .env
 ```
 
-2. Отредактируйте `.env` в любом текстовом редакторе (например, `nano`, `VSCode`):
+2. Edit `.env` in any text editor (e.g., `nano`, `VSCode`):
 ```bash
 nano .env
 ```
 
-3. Настройте параметры: файл разделен на секции — измените значения в соответствии с Вашими задачами. Например:
+3. Configure parameters: the file is divided into sections — modify values according to your needs. For example:
 
 ```bash
 # === MODEL CONFIGURATION ===
@@ -83,23 +89,24 @@ MODELS_DIR=models
 VIDEOS_DIR=videos
 ```
 
-### **V. Запуск приложения**
+### **V. Run the Application**
 
 ```bash
 python -m app.main
 ```
 
-## **Лицензия**
+## **License**
 
-Проект распространяется под лицензией [BSD-3-Clause](LICENSE). 
+This project is licensed under the [BSD-3-Clause License](LICENSE).
 
-> **Внимание**  
-> Проект включает сторонние компоненты с отдельными лицензиями, которые могут отличаться от BSD-3-Clause.  
-> Полный список лицензий зависимостей доступен в файле [THIRD_PARTY_LICENSES.md](SBOMs/THIRD_PARTY_LICENSES.md).
+> **Warning**  
+> The project includes third-party components with separate licenses that may differ from BSD-3-Clause.  
+> A complete list of dependency licenses is available in [THIRD_PARTY_LICENSES.md](SBOMs/THIRD_PARTY_LICENSES.md).
 
-## **Инструменты разработки**
-Проект использует следующие инструменты для обеспечения воспроизводимости и управления зависимостями:
+## **Development Tools**
 
-- [Micromamba](https://github.com/mamba-org/mamba), ультрабыстрая реализация [Conda](https://github.com/conda/conda) для создания изолированных окружений.
-- [conda-lock](https://github.com/conda/conda-lock), утилита для генерации [точного lock-файла](SBOMs/conda-linux-64-lock.yml) для гарантии идентичного воссоздания окружения на любых системах.
-- [pip-licenses](https://github.com/raimon49/pip-licenses), утилита для генерации файла [THIRD_PARTY_LICENSES.md](SBOMs/THIRD_PARTY_LICENSES.md) с лицензиями всех conda-зависимостей.
+The project uses the following tools for reproducibility and dependency management:
+
+- [Micromamba](https://github.com/mamba-org/mamba), an ultra-fast implementation of [Conda](https://github.com/conda/conda) for creating isolated environments.
+- [conda-lock](https://github.com/conda/conda-lock), a utility for generating [exact lock files](SBOMs/conda-linux-64-lock.yml) to guarantee identical environment recreation across systems.
+- [pip-licenses](https://github.com/raimon49/pip-licenses), a utility for generating [THIRD_PARTY_LICENSES.md](SBOMs/THIRD_PARTY_LICENSES.md) with licenses of all conda dependencies.
